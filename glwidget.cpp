@@ -118,6 +118,7 @@ void GLWidget::mousePressEvent(QMouseEvent *event)
 
 void GLWidget::mouseMoveEvent(QMouseEvent *event)
 {
+    /*changes git test*/
     int dx = event->x() - lastPos.x();
     int dy = event->y() - lastPos.y();
 
