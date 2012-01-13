@@ -3,7 +3,9 @@
 #define GLWIDGET_H
 
 #include <QGLWidget>
+#include <GL/glu.h>
 #include "map.h"
+#include "type_and_const.h"
 
 class GLWidget : public QGLWidget
 {
@@ -17,31 +19,43 @@ public:
     QSize sizeHint() const;
 
 public slots:
-    void setXRotation(int angle);
-    void setYRotation(int angle);
-    void setZRotation(int angle);
-    void openImage();
+    void setXPosition(int angle);
+    void setYPosition(int angle);
+    void setZPosition(int angle);
+    void setScale(int zoom);
+    void setAngle(int a);
+    void setImage(Image* data);
+    void clean();
 
 signals:
-    void xRotationChanged(int angle);
-    void yRotationChanged(int angle);
-    void zRotationChanged(int angle);
+    void xPositionChanged(int angle);
+    void yPositionChanged(int angle);
+    void zPositionChanged(int angle);
+    void scaleChanged(int scale);
+
 
 protected:
     void initializeGL();
     void paintGL();
     void resizeGL(int width, int height);
-    void mousePressEvent(QMouseEvent *event);
-    void mouseMoveEvent(QMouseEvent *event);
 
-private:
+protected:
     int xRot;
     int yRot;
     int zRot;
+
+    int scale;
+
+    int xPos;
+    int yPos;
+    int zPos;
+
+    int angle;
+
     QPoint lastPos;
-    QColor qtGreen;
-    QColor qtPurple;
     Map *map;
+    bool f;
+
 };
 
 

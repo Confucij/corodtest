@@ -1,23 +1,15 @@
 #ifndef MAP_H
 #define MAP_H
 
-#define RED 0
-#define GREEN 1
-#define BLUE 2
-#define ALL 3
+#include <QtOpenGL>
+#include "type_and_const.h"
 
-typedef struct Image {
-    unsigned long sizeX;
-    unsigned long sizeY;
-    unsigned char *data;
-} Image;
+
 
 /*
 Тип материала и прочие условия
 */
-typedef struct {
 
-} mat_Type;
 
 class Map
 {
@@ -25,24 +17,19 @@ public:
     Map();
     ~Map();
 
-    void paint(unsigned int xTopL,unsigned int zTopL,unsigned int xBotomR,unsigned int zBotomR);
-
-    /*
-    Загружает изображение и разделяет выделяет нужные цветовые каналы
-    Результат загружает в переменную map
-    */
-    char ImageLoad(const char* filename,unsigned char c_mode);
-    char save_map(const char* filename);
+    void paint();
+    void setVertexColor(unsigned char h); //вычисляет цвет вершины в зависимости от высоты
+    bool Init();
+    void clean();
     //-------------------------------------------------------------------------
     void setMap(Image* data);
+    Image* getMap();
     //-------------------------------------------------------------------------
-    char calculate_map(mat_Type opt);
-private:
-    void setVertexColor(unsigned char h); //вычисляет цвет вершины в зависимости от высоты
 private:
     Image *map; //хранит полученную карту высот
     unsigned int precision; //шаг с которым будем двигатся по карте высот
-
+    int Zoom;								// Коэффициент увиличения
+    GLint list;
 };
 
 #endif // MAP_H

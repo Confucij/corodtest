@@ -2,9 +2,13 @@
 #define WINDOW_H
 
 #include <QMainWindow>
+#include <QVector>
 #include "glwidget.h"
 #include "ui_window.h"
 #include "map.h"
+#include "new_dlg.h"
+#include "projecthandle.h"
+#include "type_and_const.h"
 
 namespace Ui {
     class Window;
@@ -18,8 +22,15 @@ public:
     Window(QWidget *parent = 0);
     ~Window();
 signals:
-    void showmsg(const QString & message, int timeout = 0);
+
+public slots:
+    void setImageData(int x,int z);
+    void addlistlog(QString);
+    void additemsList(QString);
+    void clean();
+
 private:
+    ProjectHandle *project;
    // GLWidget *glWidget;
 };
 
