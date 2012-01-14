@@ -5,8 +5,8 @@
 #include <time.h>
 Map::Map()
 {
- map = NULL;
- precision=8;
+    map = NULL;
+    precision=8;
 }
 
 unsigned char get_point(Image *data,unsigned int x,unsigned int y){
@@ -22,8 +22,8 @@ Map::~Map(){
 bool Map::Init(){
 
     if(map==NULL || map->data==NULL){
-         return false;
-     }
+        return false;
+    }
 
 
     list=glGenLists(1);
@@ -76,25 +76,24 @@ void Map::paint(){
     return;
 }
 
- void Map::setMap(Image *data){
-     map=data;
- }
+void Map::setMap(Image *data){
+    map=data;
+}
 
- Image* Map::getMap(){
-        return map;
- }
+Image* Map::getMap(){
+    return map;
+}
 
 void Map::setVertexColor(unsigned char h){
     float k=h/255.0;
-         glColor3f(0,k,00);
-         return;
-
- }
+    glColor3f(0,k,00);
+    return;
+}
 
 void Map::clean(){
     map=NULL;
     glNewList(1,GL_COMPILE_AND_EXECUTE);
     glClear(GL_COLOR_BUFFER_BIT);
     glEndList();
-   // glDeleteLists(1,1);
+    // glDeleteLists(1,1);
 }

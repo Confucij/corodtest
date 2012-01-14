@@ -44,17 +44,16 @@ Window::~Window()
 }
 
 void Window::clean(){
-    listLog->clear();
     itemsList->clear();
     setImageData(10,10);
-  return ;
+    return ;
 
 }
 
 
 
 void Window::addlistlog(QString msg){
-    listLog->addItem(msg);
+    //  listLog->addItem(msg);
 }
 
 

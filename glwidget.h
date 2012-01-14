@@ -54,7 +54,7 @@ protected:
 
     QPoint lastPos;
     Map *map;
-    bool f;
+    bool init_flag;
 
 };
 

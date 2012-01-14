@@ -54,15 +54,15 @@ void ProjectHandle::loadData(){
         s << "";
     }else{
 
-    QTextStream readS(&libFile);
-    while(!readS.atEnd()){
-        QString inp;
-        readS >> inp;
-        dlg.material_Box->addItem(inp);
-    }
+        QTextStream readS(&libFile);
+        while(!readS.atEnd()){
+            QString inp;
+            readS >> inp;
+            dlg.material_Box->addItem(inp);
+        }
     }
 
-//    connect(dlg.add_Button,SIGNAL(clicked()),this,SLOT(openLib()));
+    //    connect(dlg.add_Button,SIGNAL(clicked()),this,SLOT(openLib()));
 
     if(!dlg.exec()){
         delete colorMap;
@@ -119,28 +119,10 @@ void ProjectHandle::loadData(){
 
 void ProjectHandle::loadData(PObject *obj){
 
-//    colorMap = new QImage(obj->path);
-
-//    obj->map = new Image;
-//    obj->map->data = new uchar[colorMap->width()*colorMap->height()];
-//    obj->map->sizeX =colorMap->width() ;
-//    obj->map->sizeY =colorMap->height() ;
-
-//    int k=0;
-//    for(uint i=0;i<(obj->map->sizeY);i++){
-//        for(uint j=0;j<obj->map->sizeX;j++){
-//            QRgb tmp=colorMap->pixel(j,i);
-//            uchar t=static_cast<uchar>(qBlue(tmp));
-//            obj->map->data[k]=t;
-//            k++;
-//        }
-//    }
-
-//    calculate(obj);
 }
 
 
- void ProjectHandle::changeCurrent(QModelIndex index){
+void ProjectHandle::changeCurrent(QModelIndex index){
 
     emit cleanGl();
     map=NULL;
@@ -178,7 +160,7 @@ void ProjectHandle::loadData(PObject *obj){
     return;
 }
 
- void ProjectHandle::newProject(){
+void ProjectHandle::newProject(){
 
     if(path!=""){
         QMessageBox msgBox;
@@ -189,20 +171,16 @@ void ProjectHandle::loadData(PObject *obj){
 
         switch (ret) {
         case QMessageBox::Save:
-            // Save was clicked
             saveProject();
             clearProject();
             break;
         case QMessageBox::Discard:
-            // Don't Save was clicked
             clearProject();
             break;
         case QMessageBox::Cancel:
-            // Cancel was clicked
             return;
             break;
         default:
-            // should never be reached
             break;
         }
     }
@@ -238,7 +216,7 @@ void ProjectHandle::loadData(PObject *obj){
 
 }
 
- void ProjectHandle::saveProject(){
+void ProjectHandle::saveProject(){
 
     if(this->path==""){
         QFileDialog dlg;
@@ -271,10 +249,10 @@ void ProjectHandle::loadData(PObject *obj){
         PObject tmp=iter.value();
         QDomElement obj = doc.createElement("Object");
         root.appendChild(obj);
-            obj.setAttribute("Path",tmp.path);
-            obj.setAttribute("Material",tmp.material);
-            obj.setAttribute("Height",tmp.height);
-            obj.setAttribute("Width",tmp.width);
+        obj.setAttribute("Path",tmp.path);
+        obj.setAttribute("Material",tmp.material);
+        obj.setAttribute("Height",tmp.height);
+        obj.setAttribute("Width",tmp.width);
 
         iter++;
     }
@@ -288,7 +266,7 @@ void ProjectHandle::loadData(PObject *obj){
     }
 }
 
- void ProjectHandle::clearProject(){
+void ProjectHandle::clearProject(){
     emit cleanGl();
     emit cleanWindow();
     if(map!=NULL){
@@ -307,7 +285,7 @@ void ProjectHandle::loadData(PObject *obj){
     projObjects.clear();
 }
 
- void ProjectHandle::closeProject(){
+void ProjectHandle::closeProject(){
     QMessageBox msgBox;
     msgBox.setText("Do you want to save your changes?");
     msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
@@ -335,34 +313,34 @@ void ProjectHandle::loadData(PObject *obj){
     return;
 }
 
- void ProjectHandle::openProject()
+void ProjectHandle::openProject()
 {
     QMessageBox msgBox;
 
     if(projObjects.size()!=0){
-    msgBox.setText("Do you want to save your changes?");
-    msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
-    msgBox.setDefaultButton(QMessageBox::Save);
-    int ret = msgBox.exec();
+        msgBox.setText("Do you want to save your changes?");
+        msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+        msgBox.setDefaultButton(QMessageBox::Save);
+        int ret = msgBox.exec();
 
-    switch (ret) {
-    case QMessageBox::Save:
-        // Save was clicked
-        saveProject();
-        clearProject();
-        break;
-    case QMessageBox::Discard:
-        // Don't Save was clicked
-        clearProject();
-        break;
-    case QMessageBox::Cancel:
-        // Cancel was clicked
-        return;
-        break;
-    default:
-        // should never be reached
-        break;
-    }
+        switch (ret) {
+        case QMessageBox::Save:
+            // Save was clicked
+            saveProject();
+            clearProject();
+            break;
+        case QMessageBox::Discard:
+            // Don't Save was clicked
+            clearProject();
+            break;
+        case QMessageBox::Cancel:
+            // Cancel was clicked
+            return;
+            break;
+        default:
+            // should never be reached
+            break;
+        }
     }
     QFileDialog dlg;
     QString path = dlg.getOpenFileName(NULL,tr("Project file"), ".",tr("Project files (*.fproj)"));
@@ -397,7 +375,7 @@ void ProjectHandle::loadData(PObject *obj){
 
 }
 
- void ProjectHandle::openLib()
+void ProjectHandle::openLib()
 {
 
     Lib_dialog *lib=new Lib_dialog(libPath);

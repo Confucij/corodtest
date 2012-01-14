@@ -36,8 +36,8 @@
         </property>
         <property name="maximumSize">
          <size>
-          <width>500</width>
-          <height>500</height>
+          <width>800</width>
+          <height>600</height>
          </size>
         </property>
         <property name="currentIndex">
@@ -208,7 +208,7 @@
        <widget class="QListWidget" name="itemsList">
         <property name="maximumSize">
          <size>
-          <width>500</width>
+          <width>800</width>
           <height>16777215</height>
          </size>
         </property>
@@ -238,61 +238,6 @@
       </item>
      </layout>
     </item>
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_6">
-      <item>
-       <widget class="QStackedWidget" name="control_stack">
-        <property name="maximumSize">
-         <size>
-          <width>1000</width>
-          <height>500</height>
-         </size>
-        </property>
-        <property name="currentIndex">
-         <number>0</number>
-        </property>
-        <widget class="QWidget" name="page">
-         <layout class="QVBoxLayout" name="verticalLayout_4">
-          <item>
-           <widget class="QWidget" name="widget" native="true">
-            <property name="maximumSize">
-             <size>
-              <width>500</width>
-              <height>500</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="verticalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QListWidget" name="listLog">
-            <property name="maximumSize">
-             <size>
-              <width>5000</width>
-              <height>150</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="page_2"/>
-       </widget>
-      </item>
-     </layout>
-    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -301,7 +246,7 @@
      <x>0</x>
      <y>0</y>
      <width>735</width>
-     <height>25</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -341,6 +286,9 @@
    <property name="statusTip">
     <string>Открыть существующий проект</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="action_SaveProj">
    <property name="icon">
@@ -353,6 +301,9 @@
    <property name="statusTip">
     <string>Сохранить изменения в текущем проекте</string>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="action_NewProj">
    <property name="icon">
@@ -364,6 +315,9 @@
    </property>
    <property name="statusTip">
     <string>Создать новый проект</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="action_Exit">

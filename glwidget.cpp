@@ -18,11 +18,12 @@
 GLWidget::GLWidget(QWidget *parent)
     : QGLWidget(QGLFormat(QGL::SampleBuffers), parent)
 {
-    xRot = 1;
-    yRot = 1;
-    zRot = 1;
-    scale =1;
-    f=false;
+    xRot    = 1;
+    yRot    = 1;
+    zRot    = 1;
+    scale   = 1;
+    angle   = 1;
+    init_flag=false;
     map = new Map;
 }
 
@@ -34,7 +35,7 @@ GLWidget::~GLWidget()
 
 void GLWidget::setImage(Image* data){
     map->setMap(data);
-    f=false;
+    init_flag=false;
     xRot=0;
     yRot=0;
     zRot=0;
@@ -43,7 +44,7 @@ void GLWidget::setImage(Image* data){
     yPos=0;
     zPos=0;
 
-   updateGL();    //
+    updateGL();    //
 
 }
 
@@ -118,36 +119,36 @@ void coord (float *x,float *y, float xc, float yc, float angle, float r)
 void GLWidget::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-      glLoadIdentity();
+    glLoadIdentity();
 
-      glTranslatef(-xPos,-yPos,-zPos);
-      if(!f){
-          f=map->Init();
-      } else {
-      float  xp= map->getMap()->sizeX / 2;
-      float  zp=map->getMap()->sizeY / 2;
-      float x,z;
-      coord(&x,&z,xp,zp,scale/57.3,(xp/4.0));
-      gluLookAt(x, 255, z,xp,angle,zp,  0, 1, 0);
-      map->paint();
-      }
- }
+    glTranslatef(-xPos,-yPos,-zPos);
+    if(!init_flag){
+        init_flag=map->Init();
+    } else {
+        float  xp= map->getMap()->sizeX / 2;
+        float  zp=map->getMap()->sizeY / 2;
+        float x,z;
+        coord(&x,&z,xp,zp,scale/57.3,(xp/4.0));
+        gluLookAt(x, 255, z,xp,angle,zp,  0, 1, 0);
+        map->paint();
+    }
+}
 
 void GLWidget::resizeGL(int width, int height)
 {
-      glViewport(0, 0, width, height);		// Reset The Current Viewport And Perspective Transformation
+    glViewport(0, 0, width, height);		// Reset The Current Viewport And Perspective Transformation
 
-      glMatrixMode(GL_PROJECTION);
-      glLoadIdentity();
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
 
-      gluPerspective(45.0f,(GLfloat)width/(GLfloat)height,0.1f,4000.0f);
-      glMatrixMode(GL_MODELVIEW);
+    gluPerspective(45.0f,(GLfloat)width/(GLfloat)height,0.1f,4000.0f);
+    glMatrixMode(GL_MODELVIEW);
 }
 
 
 void GLWidget::clean(){
     map->clean();
-    f=false;
+    init_flag=false;
     xRot=0;
     yRot=0;
     zRot=0;

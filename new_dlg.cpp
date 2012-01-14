@@ -1,6 +1,6 @@
 #include "new_dlg.h"
 #include "ui_newp_dlg.h"
- #include <QFileDialog>
+#include <QFileDialog>
 
 
 New_dlg::New_dlg(QWidget *parent) :
@@ -8,8 +8,8 @@ New_dlg::New_dlg(QWidget *parent) :
 
 {
     setupUi(this);
-//    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-//    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    //    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    //    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
 }
 
@@ -21,8 +21,8 @@ New_dlg::New_dlg(QString lib,QWidget *parent) :
     setupUi(this);
 
     libPath=lib;
-//    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-//    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    //    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    //    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
 }
 
@@ -49,11 +49,11 @@ void New_dlg::on_add_Button_clicked()
 
     }else{
 
-    QTextStream readS(&libFile);
-    while(!readS.atEnd()){
-        QString inp;
-        readS >> inp;
-       material_Box->addItem(inp);
-    }
+        QTextStream readS(&libFile);
+        while(!readS.atEnd()){
+            QString inp;
+            readS >> inp;
+            material_Box->addItem(inp);
+        }
     }
 }
