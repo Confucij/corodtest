@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     glwidget.cpp \
     graph_widget.cpp \
     func.cpp \
-    lib_dialog.cpp
+    lib_dialog.cpp \
+    cut_widget.cpp
 
 HEADERS  += \
     window.h \
@@ -30,12 +31,14 @@ HEADERS  += \
     type_and_const.h \
     graph_widget.h \
     func.h \
-    lib_dialog.h
+    lib_dialog.h \
+    cut_widget.h
 
 FORMS += \
     window.ui \
     newp_dlg.ui \
-    lib_dialog.ui
+    lib_dialog.ui \
+    cut_widget.ui
 
 RESOURCES += \
     resources.qrc

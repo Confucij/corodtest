@@ -15,7 +15,8 @@ class Cut_widget : public QWidget
 public:
     Cut_widget(PObject *obj, QWidget *parent = 0);
     ~Cut_widget();
-    
+public slots:
+    void draw_cut();
 private:
     Ui::Cut_widget *ui;
     PObject object;

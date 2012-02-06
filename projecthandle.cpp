@@ -15,12 +15,6 @@ ProjectHandle::ProjectHandle(QObject *parent) :    QObject(parent)
     version="0.01a";
 }
 
-void ProjectHandle::save_map(const char* filename){
-    FILE *f=fopen(filename,"wb");
-    fwrite((void*)map->data,map->sizeX*map->sizeY,1,f);
-    fclose(f);
-    return;
-}
 
 void ProjectHandle::loadData(){
 
@@ -29,18 +23,11 @@ void ProjectHandle::loadData(){
         return;
     }
 
-    map=NULL;
 
-    if(colorMap!=NULL){
-        delete colorMap;
-        colorMap = NULL;
-    }
-
-    QFileInfo inf(Name);
-    colorMap = new QImage(Name);
+    QImage* load_image = new QImage(Name);
 
     New_dlg dlg(libPath);
-    QPixmap pic =QPixmap::fromImage(colorMap->scaled(dlg.pic_label->size())) ;
+    QPixmap pic =QPixmap::fromImage(load_image->scaled(dlg.pic_label->size())) ;
     dlg.pic_label->setPixmap(pic);
 
     QFile libFile(libPath);
@@ -62,13 +49,13 @@ void ProjectHandle::loadData(){
         }
     }
 
-    //    connect(dlg.add_Button,SIGNAL(clicked()),this,SLOT(openLib()));
 
     if(!dlg.exec()){
-        delete colorMap;
+        delete load_image;
         return;
     }
 
+    colorMap = load_image;
 
     PObject object;
     if(dlg.width_sizeBox->currentText()=="um"){
@@ -85,40 +72,24 @@ void ProjectHandle::loadData(){
 
     object.map = new Image;
     object.map->data = new uchar[colorMap->width()*colorMap->height()];
-
     object.material     =   dlg.material_Box->currentText();
     object.map->sizeX   =   colorMap->width() ;
     object.map->sizeY   =   colorMap->height() ;
 
-
-    int k=0;
-    for(int i=0;i<(colorMap->height());i++){
-        for(int j=0;j<colorMap->width();j++){
-            QRgb tmp=colorMap->pixel(j,i);
-            uchar t=static_cast<uchar>(qBlue(tmp));
-            object.map->data[k]=t;
-            k++;
-        }
-    }
 
     calculate(&object);
 
     map=object.map;
     object.path=Name;
 
+    QFileInfo inf(Name);
     projObjects.insert(inf.fileName(),object);
 
 
     emit addToList(inf.fileName());
-
     emit cleanGl();
-
     emit set_glwMap(map);
     emit imageLoad(map->sizeX,map->sizeY);
-}
-
-void ProjectHandle::loadData(PObject *obj){
-
 }
 
 
@@ -163,26 +134,7 @@ void ProjectHandle::changeCurrent(QModelIndex index){
 void ProjectHandle::newProject(){
 
     if(path!=""){
-        QMessageBox msgBox;
-        msgBox.setText("Do you want to save your changes?");
-        msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
-        msgBox.setDefaultButton(QMessageBox::Save);
-        int ret = msgBox.exec();
-
-        switch (ret) {
-        case QMessageBox::Save:
-            saveProject();
-            clearProject();
-            break;
-        case QMessageBox::Discard:
-            clearProject();
-            break;
-        case QMessageBox::Cancel:
-            return;
-            break;
-        default:
-            break;
-        }
+        if(closeProject()==1) return;
     }
 
     QFileDialog dlg;
@@ -269,6 +221,7 @@ void ProjectHandle::saveProject(){
 void ProjectHandle::clearProject(){
     emit cleanGl();
     emit cleanWindow();
+
     if(map!=NULL){
         if(map->data!=NULL){
             delete map->data;
@@ -285,7 +238,7 @@ void ProjectHandle::clearProject(){
     projObjects.clear();
 }
 
-void ProjectHandle::closeProject(){
+int ProjectHandle::closeProject(){
     QMessageBox msgBox;
     msgBox.setText("Do you want to save your changes?");
     msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
@@ -297,20 +250,18 @@ void ProjectHandle::closeProject(){
         // Save was clicked
         saveProject();
         clearProject();
-        break;
+        return 0;
     case QMessageBox::Discard:
         // Don't Save was clicked
         clearProject();
-        break;
+        return 0;
     case QMessageBox::Cancel:
         // Cancel was clicked
-        return;
-        break;
+        return 1;
     default:
         // should never be reached
-        break;
+        return 1;
     }
-    return;
 }
 
 void ProjectHandle::openProject()
@@ -318,29 +269,7 @@ void ProjectHandle::openProject()
     QMessageBox msgBox;
 
     if(projObjects.size()!=0){
-        msgBox.setText("Do you want to save your changes?");
-        msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
-        msgBox.setDefaultButton(QMessageBox::Save);
-        int ret = msgBox.exec();
-
-        switch (ret) {
-        case QMessageBox::Save:
-            // Save was clicked
-            saveProject();
-            clearProject();
-            break;
-        case QMessageBox::Discard:
-            // Don't Save was clicked
-            clearProject();
-            break;
-        case QMessageBox::Cancel:
-            // Cancel was clicked
-            return;
-            break;
-        default:
-            // should never be reached
-            break;
-        }
+        if(closeProject()==1) return;
     }
     QFileDialog dlg;
     QString path = dlg.getOpenFileName(NULL,tr("Project file"), ".",tr("Project files (*.fproj)"));
@@ -372,7 +301,6 @@ void ProjectHandle::openProject()
 
     }
 
-
 }
 
 void ProjectHandle::openLib()
@@ -392,6 +320,18 @@ void ProjectHandle::calculate(PObject *obj)
       Ewe zhe nam ponadobjatsja dannye statistiki. Dopishi nuzhnye polja v tip PObject. Schitaj ih tut zhe i zapolnjaj obj.
       */
 
+//debug and testing block
+//пока не написана обработка достаем синий канал
+    int k=0;
+    for(int i=0;i<(colorMap->height());i++){
+        for(int j=0;j<colorMap->width();j++){
+            QRgb tmp=colorMap->pixel(j,i);
+            uchar t=static_cast<uchar>(qBlue(tmp));
+            obj->map->data[k]=t;
+            k++;
+        }
+    }
+//debug and testing block
 
 
 }

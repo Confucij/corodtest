@@ -12,3 +12,8 @@ Cut_widget::~Cut_widget()
 {
     delete ui;
 }
+
+void Cut_widget::draw_cut()
+{
+
+}

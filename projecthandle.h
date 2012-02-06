@@ -38,12 +38,11 @@ signals:
 
 public slots:
     void loadData();
-    void loadData(PObject*);
     void changeCurrent(QModelIndex index);
 //-------------------------------------------------------
     void newProject();
     void saveProject();
-    void closeProject();
+    int closeProject();
     void openProject();
 //-------------------------------------------------------
     void openLib();
