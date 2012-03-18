@@ -9,7 +9,7 @@ ProjectHandle::ProjectHandle(QObject *parent) :    QObject(parent)
     map=NULL;
     colorMap=NULL;
     projName="Default project";
-    path="";
+    projPath="";
     libPath="lib/lib.lst";
     projObjects.clear();
     version="0.01a";
@@ -133,7 +133,7 @@ void ProjectHandle::changeCurrent(QModelIndex index){
 
 void ProjectHandle::newProject(){
 
-    if(path!=""){
+    if(projPath!=""){
         if(closeProject()==1) return;
     }
 
@@ -149,7 +149,7 @@ void ProjectHandle::newProject(){
         tmp+=".fproj";
         path=inf.absolutePath()+"/"+tmp;
     }
-    this->path=path;
+    this->projPath=path;
 
     QDomDocument doc("xml version=\"1.0\" encoding=\"UTF-8\"");
     QDomElement root =  doc.createElement(inf.baseName());
@@ -170,7 +170,7 @@ void ProjectHandle::newProject(){
 
 void ProjectHandle::saveProject(){
 
-    if(this->path==""){
+    if(this->projPath==""){
         QFileDialog dlg;
         dlg.setDefaultSuffix("fproj");
         QString path = dlg.getSaveFileName(NULL,tr("Project location"), ".",tr("Project files (*.fproj)"));
@@ -183,11 +183,11 @@ void ProjectHandle::saveProject(){
             tmp+=".fproj";
             path=inf.absolutePath()+"/"+tmp;
         }
-        this->path=path;
+        this->projPath=path;
     }
 
 
-    QFileInfo inf(path);
+    QFileInfo inf(projPath);
     QDomDocument doc(inf.baseName());
     QDomElement root =  doc.createElement("Project");
     doc.appendChild(root);
@@ -209,7 +209,7 @@ void ProjectHandle::saveProject(){
         iter++;
     }
 
-    QFile pfile(path);
+    QFile pfile(projPath);
     if(pfile.open(QIODevice::WriteOnly)){
         QTextStream stream(&pfile);
         stream << doc.toString();
@@ -234,7 +234,7 @@ void ProjectHandle::clearProject(){
         colorMap = NULL;
     }
     projName="Default project";
-    path="";
+    projPath="";
     projObjects.clear();
 }
 
@@ -276,7 +276,7 @@ void ProjectHandle::openProject()
     if(path.isEmpty()){
         return;
     }
-    this->path=path;
+    this->projPath=path;
     QFile pfile(path);
     QDomDocument doc;
     doc.setContent(&pfile);
@@ -315,9 +315,7 @@ void ProjectHandle::calculate(PObject *obj)
 {
     /*
       Sjuda pihaj raschet karty vysot. Poluchennuju kartu polozhish' v obj->map; U nej est' svojstvo data - sama karta.
-      Kogda ona k tebe pridet ona budet soderzhat' znachenie kakogo-to cveta(na dannyj moment sinego). Dannye o vseh
-      cvetah budut hranitsja v colorMap. obrabotannuju kartu polozhi tuda zhe.
-      Ewe zhe nam ponadobjatsja dannye statistiki. Dopishi nuzhnye polja v tip PObject. Schitaj ih tut zhe i zapolnjaj obj.
+       Dannye o vseh cvetah budut hranitsja v colorMap. obrabotannuju kartu polozhi tuda zhe.
       */
 
 //debug and testing block

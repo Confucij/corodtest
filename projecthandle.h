@@ -56,7 +56,7 @@ protected:
     QImage *colorMap;               //текущее изображение
 //-----------------------------------------------------------------------
     QString projName;
-    QString path;
+    QString projPath;
     QString libPath;                //путь к папке с файлами материалов
     QString version;
 

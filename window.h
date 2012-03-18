@@ -9,6 +9,7 @@
 #include "new_dlg.h"
 #include "projecthandle.h"
 #include "type_and_const.h"
+#include "cut_widget.h"
 
 namespace Ui {
     class Window;

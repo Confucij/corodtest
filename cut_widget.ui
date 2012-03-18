@@ -62,7 +62,7 @@
       </layout>
      </item>
      <item>
-      <widget class="QDoubleSpinBox" name="pos_sBox"/>
+      <widget class="QDoubleSpinBox" name="pos_Box"/>
      </item>
      <item>
       <spacer name="verticalSpacer">
@@ -84,7 +84,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>pos_sBox</sender>
+   <sender>pos_Box</sender>
    <signal>valueChanged(double)</signal>
    <receiver>Cut_widget</receiver>
    <slot>draw_cut()</slot>

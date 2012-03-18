@@ -28,11 +28,5 @@ typedef struct PObject
 //------------------------
 
 
-//------------------------
-#define BMP 1
-#define JPEG 2
-#define PNG 3
-//------------------------
-
 
 #endif // TYPE_AND_CONST_H

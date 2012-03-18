@@ -21,6 +21,7 @@ public:
     void setVertexColor(unsigned char h); //вычисляет цвет вершины в зависимости от высоты
     bool Init();
     void clean();
+    static  unsigned char get_point(Image *data,unsigned int x,unsigned int y);
     //-------------------------------------------------------------------------
     void setMap(Image* data);
     Image* getMap();

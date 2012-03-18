@@ -9,7 +9,7 @@ Map::Map()
     precision=8;
 }
 
-unsigned char get_point(Image *data,unsigned int x,unsigned int y){
+unsigned char Map::get_point(Image *data,unsigned int x,unsigned int y){
     //sizeY - строки
     //y - строки
     return data->data[(y*data->sizeY)+x];
