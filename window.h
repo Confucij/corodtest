@@ -30,6 +30,10 @@ public slots:
     void additemsList(QString);
     void clean();
 
+
+private slots:
+    void on_action_cut_triggered();
+
 private:
     ProjectHandle *project;
    // GLWidget *glWidget;

@@ -35,7 +35,8 @@ signals:
     void addToList(const QString & message);
     void cleanGl();
     void cleanWindow();
-
+public:
+    PObject getPObj();
 public slots:
     void loadData();
     void changeCurrent(QModelIndex index);
@@ -54,6 +55,7 @@ protected:
     QHash<QString,PObject> projObjects;
     Image *map;                     //текущая карта
     QImage *colorMap;               //текущее изображение
+    QString curName;
 //-----------------------------------------------------------------------
     QString projName;
     QString projPath;

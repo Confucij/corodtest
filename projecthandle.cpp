@@ -85,7 +85,7 @@ void ProjectHandle::loadData(){
     QFileInfo inf(Name);
     projObjects.insert(inf.fileName(),object);
 
-
+    curName=inf.fileName();
     emit addToList(inf.fileName());
     emit cleanGl();
     emit set_glwMap(map);
@@ -332,4 +332,9 @@ void ProjectHandle::calculate(PObject *obj)
 //debug and testing block
 
 
+}
+
+PObject ProjectHandle::getPObj()
+{
+    return projObjects[this->curName];
 }

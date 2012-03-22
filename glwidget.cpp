@@ -161,4 +161,10 @@ void GLWidget::clean(){
 
 }
 
+void GLWidget::draw(int direction, int pos)
+
+{
+
+}
+
 

@@ -33,6 +33,12 @@
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
         <widget class="QPushButton" name="pushButton">
+         <property name="maximumSize">
+          <size>
+           <width>200</width>
+           <height>25</height>
+          </size>
+         </property>
          <property name="text">
           <string>Save</string>
          </property>
@@ -42,6 +48,12 @@
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
           <widget class="QRadioButton" name="x_rButton">
+           <property name="maximumSize">
+            <size>
+             <width>200</width>
+             <height>16777215</height>
+            </size>
+           </property>
            <property name="text">
             <string>X</string>
            </property>
@@ -52,6 +64,12 @@
          </item>
          <item>
           <widget class="QRadioButton" name="y_rButton">
+           <property name="maximumSize">
+            <size>
+             <width>200</width>
+             <height>16777215</height>
+            </size>
+           </property>
            <property name="text">
             <string>Y</string>
            </property>
@@ -62,7 +80,14 @@
       </layout>
      </item>
      <item>
-      <widget class="QDoubleSpinBox" name="pos_Box"/>
+      <widget class="QDoubleSpinBox" name="pos_Box">
+       <property name="maximumSize">
+        <size>
+         <width>200</width>
+         <height>25</height>
+        </size>
+       </property>
+      </widget>
      </item>
      <item>
       <spacer name="verticalSpacer">

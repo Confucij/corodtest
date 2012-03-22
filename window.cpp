@@ -27,7 +27,6 @@ Window::Window(QWidget *parent) :
     connect(action_Lib,SIGNAL(triggered()),project,SLOT(openLib()));
     connect(action_SaveProj,SIGNAL(triggered()),project,SLOT(saveProject()));
 
-
     connect(project,SIGNAL(imageLoad(int,int)),this,SLOT(setImageData(int,int)));
     connect(project,SIGNAL(set_glwMap(Image*)),glWidget,SLOT(setImage(Image*)));
     connect(project,SIGNAL(addToLog(QString)),this,SLOT(addlistlog(QString)));
@@ -77,3 +76,13 @@ void Window::additemsList(QString msg)
     itemsList->addItem(msg);
 }
 
+
+void Window::on_action_cut_triggered()
+
+{	PObject obj=project->getPObj();
+   Cut_widget *dlg = new Cut_widget(&obj);
+    connect(dlg,SIGNAL(draw_cut_GL(int,int)),glWidget,SLOT(draw(int,int)));
+    if(!dlg->exec()){
+
+    }
+}

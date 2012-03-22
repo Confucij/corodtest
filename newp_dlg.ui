@@ -51,7 +51,11 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="QDoubleSpinBox" name="width_SpinBox"/>
+                  <widget class="QDoubleSpinBox" name="width_SpinBox">
+                   <property name="maximum">
+                    <double>10000.000000000000000</double>
+                   </property>
+                  </widget>
                  </item>
                  <item>
                   <widget class="QComboBox" name="width_sizeBox">
@@ -85,7 +89,11 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="QDoubleSpinBox" name="height_SpinBox"/>
+                  <widget class="QDoubleSpinBox" name="height_SpinBox">
+                   <property name="maximum">
+                    <double>10000.000000000000000</double>
+                   </property>
+                  </widget>
                  </item>
                  <item>
                   <widget class="QComboBox" name="height_sizeBox">

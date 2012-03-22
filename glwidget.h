@@ -26,6 +26,7 @@ public slots:
     void setAngle(int a);
     void setImage(Image* data);
     void clean();
+    void draw(int direction, int pos);
 
 signals:
     void xPositionChanged(int angle);

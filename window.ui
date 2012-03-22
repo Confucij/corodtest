@@ -257,6 +257,7 @@
     <addaction name="action"/>
     <addaction name="action_2"/>
     <addaction name="action_Lib"/>
+    <addaction name="action_cut"/>
    </widget>
    <addaction name="menu"/>
    <addaction name="menu_3"/>
@@ -335,6 +336,11 @@
   <action name="action_Lib">
    <property name="text">
     <string>Библиотека материалов</string>
+   </property>
+  </action>
+  <action name="action_cut">
+   <property name="text">
+    <string>Разрез</string>
    </property>
   </action>
  </widget>
